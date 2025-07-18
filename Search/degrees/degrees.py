@@ -55,7 +55,7 @@ def load_data(directory):
 def main():
     if len(sys.argv) > 2:
         sys.exit("Usage: python degrees.py [directory]")
-    directory = sys.argv[1] if len(sys.argv) == 2 else "large"
+    directory = sys.argv[1] if len(sys.argv) == 2 else "small"
 
     # Load data from files into memory
     print("Loading data...")
@@ -91,9 +91,29 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
+    queue = QueueFrontier()
+    explored = set()
 
-    # TODO
-    raise NotImplementedError
+    start = Node(state=source, parent=None, action=None)
+    queue.add(start)
+    path = []
+
+    while not queue.empty():
+        node = queue.remove()
+        if node.state == target:
+            while node.parent is not None:
+                path.append((node.action, node.state))
+                node = node.parent
+            path.reverse()
+            return path
+
+        for movie_id in people[node.state]["movies"]:
+            for person_id in movies[movie_id]["stars"]:
+                if person_id not in explored:
+                    explored.add(person_id)
+                    queue.add(Node(state=person_id, parent=node, action=movie_id))
+
+    return None
 
 
 def person_id_for_name(name):
