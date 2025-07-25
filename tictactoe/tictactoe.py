@@ -122,6 +122,10 @@ def utility(board):
         return 0
 
 def min_value(board):
+    """
+    Returns the minimum value of the board.
+    """
+
     if terminal(board):
         return (None, utility(board))
     else:
@@ -142,6 +146,10 @@ def min_value(board):
 
 
 def max_value(board):
+    """
+    Returns the maximum value of the board.
+    """
+
     if terminal(board):
         return (None, utility(board))
     else:
@@ -174,5 +182,4 @@ def minimax(board):
         return max_value(board)[0]
     else:
         return min_value(board)[0]
-
 
