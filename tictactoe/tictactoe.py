@@ -77,9 +77,9 @@ def winner(board):
     current_player = None
 
     # Check rows
-    for row in board:
-        current_player = row[0]
-        if current_player == row[1] and current_player == row[2]:
+    for i in range(3):
+        current_player = board[i][0]
+        if current_player == board[i][1] and current_player == board[i][2]:
             return current_player
 
     # Check columns
